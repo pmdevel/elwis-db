@@ -20,6 +20,9 @@ RUN echo "export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`" >> /etc/bash.bashrc
 RUN echo "export ORACLE_BASE=/u01/app/oracle" >> /etc/bash.bashrc
 RUN echo "export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH" >> /etc/bash.bashrc
 
+# When declaring VARCHAR2(5) Default to VARCHAR2(5 CHAR) instead of VARCHAR2(5 BYTE)
+#RUN ALTER SYSTEM SET NLS_LENGTH_SEMANTICS=CHAR SCOPE=BOTH;
+
 # Start listeners
 RUN $TMP_DIR/start_stop_tnslistener.sh start 
 
