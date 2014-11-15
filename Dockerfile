@@ -7,8 +7,8 @@ ENV TMP_DIR /tmp/docker_install_dir
 
 RUN mkdir -p $TMP_DIR
 
-ADD create_wiso_schema.sh 			$TMP_DIR/
-ADD WISO.sql			$TMP_DIR/
+ADD create_wiso_schema.sh	$TMP_DIR/
+ADD WISO.sql				$TMP_DIR/
 RUN chmod 755 				$TMP_DIR/create_wiso_schema.sh
 
 RUN echo "export ORACLE_HOME=$ORACLE_HOME" >> /etc/bash.bashrc
@@ -19,7 +19,7 @@ RUN echo "export ORACLE_BASE=/u01/app/oracle" >> /etc/bash.bashrc
 RUN echo "export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH" >> /etc/bash.bashrc
 
 # Create WISO schema
-RUN chmod 755 $TMP_DIR/create_wiso_schema.sh
+RUN $TMP_DIR/create_wiso_schema.sh
 
 # Clean-up
 RUN rm -rf $TMP_DIR
