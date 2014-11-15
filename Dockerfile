@@ -18,8 +18,14 @@ RUN echo "export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`" >> /etc/bash.bashrc
 RUN echo "export ORACLE_BASE=/u01/app/oracle" >> /etc/bash.bashrc
 RUN echo "export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH" >> /etc/bash.bashrc
 
+# Start db
+RUN service oracle-xe start
+
 # Create WISO schema
 RUN $TMP_DIR/create_wiso_schema.sh
+
+# Stop db
+RUN service oracle-xe stop
 
 # Clean-up
 RUN rm -rf $TMP_DIR
